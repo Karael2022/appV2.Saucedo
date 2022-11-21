@@ -1,7 +1,6 @@
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { Game, StartGame } from './screens/index';
 import React, { useState } from 'react';
-
 import { Header } from './components';
 import colors from './constants/colors';
 import { useFonts } from 'expo-font';

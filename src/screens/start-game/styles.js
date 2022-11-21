@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
         color: colors.text,
         textAlign: 'center',
         paddingVertical: 20,
+        fontFamily: 'bold-Italic-Regular',
     },
     label: {
         fontSize: 15,
