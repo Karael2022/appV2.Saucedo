@@ -1,9 +1,9 @@
-import React, { useState} from "react";
-import { View, Text, Button} from 'react-native';
+import { Button, Text, View } from 'react-native';
 import { Card, NumberContainer } from "../../components";
+import React, { useState } from "react";
+
 import colors from "../../constants/colors";
 import { styles } from './styles';
-
 
 const generateRandomNumber = (min, max, exclude) => {
     min = Math.ceil(min);
@@ -21,16 +21,16 @@ const Game = ({selectedNumber}) => {
     return (
         <View style={styles.container}>
             <Card style={styles.content}>
-                <Text style={styles.title}>Opponent's Number</Text>
+                <Text style={styles.title}>Mi seleccion</Text>
                 <NumberContainer number={currentGuess} />
                 <View style={styles.containerButton}>
                     <Button
-                        title="lower" 
+                        title="Lower" 
                         onPress={() => null} 
-                        color={colors.secondary}
+                        color={colors.primary}
                     />
                     <Button
-                        title="greater"
+                        title="Greater"
                         onPress={() => null} 
                         color={colors.primary}
                     />

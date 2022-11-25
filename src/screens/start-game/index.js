@@ -1,8 +1,9 @@
-import React, { useState} from "react";
-import { View, Text, Button, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
-import { styles } from './styles';
+import { Alert, Button, Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { Card, Input, NumberContainer } from "../../components";
+import React, { useState } from "react";
+
 import colors from "../../constants/colors";
+import { styles } from './styles';
 
 const StartGame = ({onStartGame}) => {
     const [number, setNumber] = useState('');
@@ -39,16 +40,16 @@ const StartGame = ({onStartGame}) => {
                 color={colors.primary}
             />
         </Card>
-    ) : null;
+    ) : false;
 
     return (
         <TouchableWithoutFeedback onPress={() => {
             Keyboard.dismiss();
         }}>
             <View style={styles.container}>
-                <Text style={styles.title}>Let's start!</Text>
+                <Text style={styles.title}>Start to play!</Text>
                 <Card style={styles.inputContainer}>
-                    <Text style={styles.label}>Select a number</Text>
+                    <Text style={styles.label}>Chose your numer</Text>
                     <Input
                         style={styles.input}
                         placeholder="0" 
@@ -64,7 +65,7 @@ const StartGame = ({onStartGame}) => {
                         <Button
                             title="Restart"
                             onPress={onHandleReset}
-                            color={colors.secondary}
+                            color={colors.primary}
                         />
                         <Button 
                             title="Confirm"

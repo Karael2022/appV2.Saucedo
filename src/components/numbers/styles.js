@@ -14,6 +14,6 @@ export const styles = StyleSheet.create({
     },
     number: {
         fontSize: 20,
-        fontFamily: 'Lato-Bold'
+        fontFamily: 'OpenSans-Bold'
     }
 })
