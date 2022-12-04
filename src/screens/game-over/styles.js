@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: 'center',
         paddingVertical: 10,
-        fontFamily: 'Lato-Regular'
+        fontFamily: 'OpenSans-Italic',
     },
     image: {
         width: 200,
