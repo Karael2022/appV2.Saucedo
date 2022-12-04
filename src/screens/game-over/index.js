@@ -29,7 +29,7 @@ const GameOver = ({rounds, selectedNumber, onRestart}) => {
         <View style={styles.container}>
             <Card style={isPortrait ? styles.content : styles.contentLandscape}>
                 <Image
-                source={{ uri: 'https://www.kibrispdr.org/data/750/logo-game-over-8.jpg' }} 
+                source={{ uri: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fportal.33bits.net%2Fgame-over%2F&psig=AOvVaw0gDUXzqUSeven7wLWhe-Zx&ust=1670239941490000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCODl84zv3_sCFQAAAAAdAAAAABAD' }} 
                 style={styles.image} />
                 <View style={styles.contentDetails}>
                     <Text style={styles.textContent}>Rounds: {rounds}</Text>
