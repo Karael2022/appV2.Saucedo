@@ -1,6 +1,6 @@
-import { Button, Text, View } from 'react-native';
+import { Alert, Button, Text, View } from 'react-native';
 import { Card, NumberContainer } from "../../components";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import colors from "../../constants/colors";
 import { styles } from './styles';
@@ -16,22 +16,50 @@ const generateRandomNumber = (min, max, exclude) => {
     }
 }
 
-const Game = ({selectedNumber}) => {
+const Game = ({selectedNumber, onGameOver}) => {
     const [currentGuess, setCurrentGuess] = useState(generateRandomNumber(1, 100, selectedNumber));
+    const [rounds,setRound] = useState(0);
+
+    const currentLow = useRef(1);
+    const currentHigh = useRef(100);
+
+    const onHandleNextGuess = (direction) => {
+        if(
+            direction === 'lower' && currentGuess < selectedNumber ||
+            direction === 'greater' && currentGuess > selectedNumber
+        ) {
+            Alert.alert('Don\'t lie', 'You know that this is wrong', [{text: 'Sorry', style: 'cancel'}]);
+            return;
+        }
+        if(direction === 'lower') {
+            currentHigh.current = currentGuess;
+        } else {
+            currentLow.current = currentGuess;
+        }
+        const nextNumber = generateRandomNumber(currentLow.current, currentHigh.current, currentGuess);
+        setCurrentGuess(nextNumber);
+        setRound(currentRounds => currentRounds + 1);
+    }
+
+    useEffect(() => {
+        if(currentGuess === selectedNumber) {
+            onGameOver(rounds);
+        }
+    }, [currentGuess, selectedNumber, onGameOver]);
     return (
         <View style={styles.container}>
             <Card style={styles.content}>
-                <Text style={styles.title}>Mi seleccion</Text>
+                <Text style={styles.title}>Tu contrincante</Text>
                 <NumberContainer number={currentGuess} />
                 <View style={styles.containerButton}>
                     <Button
-                        title="Lower" 
-                        onPress={() => null} 
+                        title="lower" 
+                        onPress={() => onHandleNextGuess('lower')}
                         color={colors.primary}
                     />
                     <Button
-                        title="Greater"
-                        onPress={() => null} 
+                        title="greater"
+                        onPress={() => onHandleNextGuess('greater')}  
                         color={colors.primary}
                     />
                 </View>

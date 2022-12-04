@@ -1,5 +1,5 @@
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
-import { Game, StartGame } from './screens/index';
+import { ActivityIndicator, SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
+import { Game, GameOver, StartGame } from './screens/index';
 import React, { useState } from 'react';
 
 import { Header } from './components';
@@ -13,15 +13,39 @@ export default function App() {
     'OpenSans-Italic': require('../assets/fonts/OpenSans-Italic.ttf'),
   })
   const [userNumber, setUserNumber] = useState(null);
+  const [guessRounds, setGuessRounds] = useState(0);
+
   const onStartGame = (selectedNumber) => {
     setUserNumber(selectedNumber);
   }
 
-  let content =  <StartGame onStartGame={onStartGame} />
-  const title = userNumber ? "Mayor o menor?" : 'Bienvenidos';
+  const onRestart = () => {
+    setUserNumber(null);
+    setGuessRounds(0);
+  }
 
-  if (userNumber) {
-    content = <Game selectedNumber={userNumber} />
+  const onGameOver = (rounds) => {
+    setGuessRounds(rounds);
+   }
+
+  let content =  <StartGame onStartGame={onStartGame} />
+
+  const getTitle = () => {
+    let title;
+    if(userNumber && guessRounds <= 0) {
+      title = 'Guess a Number';
+    } else if (guessRounds > 0) {
+      title = 'Game Over';
+    } else {
+      title = 'Welcome';
+    }
+    return title;
+  }
+
+  if (userNumber && guessRounds <= 0) {
+    content = <Game selectedNumber={userNumber} onGameOver={onGameOver} />
+  } else if (guessRounds > 0) {
+    content = <GameOver rounds={guessRounds} selectedNumber={userNumber} onRestart={onRestart} />
   }
 
   if (!loaded) {
@@ -33,10 +57,10 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Header title={title}/>
+    <SafeAreaView style={styles.container}>
+      <Header title={getTitle()}/>
       {content}
-    </View>
+    </SafeAreaView>
   );
 }
 
